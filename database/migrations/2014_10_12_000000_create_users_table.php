@@ -20,8 +20,10 @@ return new class extends Migration
             $table->string('middleName')->nullable();
             $table->string('lastName')->nullable();
             $table->string('mobile')->unique()->nullable();
+            $table->string('google_id')->nullable();
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('avatar')->nullable();
             $table->timestamps();
         });
     }

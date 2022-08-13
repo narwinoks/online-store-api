@@ -25,7 +25,11 @@ class AuthController extends BaseController
         if ($validator->fails()) {
             return $this->ErrorMessage("", $validator->errors());
         }
-        $user = User::where('email', $request->email)->first();
+        if (is_numeric($request->email)) {
+            $user = User::where('mobile', $request->email)->first();
+        } else {
+            $user = User::where('email', $request->email)->first();
+        }
         // dd($user->password);
         // dd(Hash::check($request->passsword, $user->password));
         if (!$user || !Hash::check($request->password, $user->password)) {
@@ -42,8 +46,15 @@ class AuthController extends BaseController
     public function register(Request $request)
     {
         $data = $request->all();
+        if (is_numeric($request->register)) {
+            $data['mobile'] = $request->register;
+            $rules = 'required|unique:App\Models\Api\User,mobile[users.mobile]|regex:/(01)[0-9]{9}/';
+        } else {
+            $data['email'] = $request->register;
+            $rules = 'required|email|unique:App\Models\Api\User,email';
+        }
         $validator = Validator::make($request->all(), [
-            'email' => 'required|unique:users|email',
+            'register' => $rules,
             'password' => 'min:5'
         ]);
         if ($validator->fails()) {
@@ -51,7 +62,7 @@ class AuthController extends BaseController
         }
         $data['password'] = Hash::make($request->password);
         $user = User::create($data);
-        $accessToken = $user->createToken($request->email)->plainTextToken;
+        $accessToken = $user->createToken($request->register)->plainTextToken;
         $response = collect($user);
         $merge = $response->merge(['token' => $accessToken]);
         // $dataResponse = $merge->all();
@@ -60,12 +71,6 @@ class AuthController extends BaseController
         // $d = new AuthResource(User::fin);
         // $responsedata = new AuthCollection(User::all());
         return $this->Response($merge, "sucessfully", Response::HTTP_OK);
-    }
-    public function loginGoogle()
-    {
-    }
-    public function loginFacebook()
-    {
     }
     public function logout(Request $request)
     {
