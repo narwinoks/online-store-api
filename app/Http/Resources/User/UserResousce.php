@@ -22,6 +22,7 @@ class UserResousce extends JsonResource
             'lastNane' => $this->lastName,
             'mobile' => $this->mobile,
             'email' => $this->email,
+            'avatar' => asset('avatar/user-profile') .'/'. $this->avatar,
             'joinAt' => $this->created_at->diffForHumans()
         ];
     }

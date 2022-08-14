@@ -7,8 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\User\UserCollection;
 use App\Http\Resources\User\UserResousce;
 use App\Models\Api\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ProfileController extends BaseController
 {
@@ -28,8 +31,39 @@ class ProfileController extends BaseController
         }
     }
 
+    public function avatar(Request $request)
+    {
+        $all = $request->all();
+        // dd($all);
+        $image = $all['avatar'];
+
+        $dir = 'avatar/user-profile';
+        $absoutPath = public_path($dir);
+        // File::makeDirectory($absoutPath);
+
+        // images/dash2
+        if ($image instanceof UploadedFile) {
+            // test.jpg =test-resize.jpg
+            // $filename = pathinfo($data['name'] . PATHINFO_FILENAME);
+            $extension = $image->getClientOriginalExtension();
+            $data['name'] = Str::random() . '.' . $extension;
+            $image->move($absoutPath, $data['name']);
+        }
+
+        $user = $request->user();
+        $user->update([
+            'avatar' => $data['name']
+        ]);
+        return $this->Response("", "successfully", Response::HTTP_OK);
+        // dd($request->file('avatar'));
+    }
     public function update(Request $request)
     {
-        $data = $request->all();
+        $user = $request->user();
+        if ($user) {
+            $user->update($request->all());
+            $response = new UserResousce($user);
+            return $this->Response($response, "Successfully", Response::HTTP_OK);
+        }
     }
 }
