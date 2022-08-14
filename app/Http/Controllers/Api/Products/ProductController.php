@@ -29,7 +29,17 @@ class ProductController extends BaseController
             return $this->ErrorMessage("Data Empty", "", Response::HTTP_NO_CONTENT);
         }
     }
-
+    public function list()
+    {
+        $products = Product::with('image')->get();
+        // dd($products);
+        $response = new ProductCollection($products);
+        if ($response) {
+            return $this->Response($response, "Successfully", Response::HTTP_OK);
+        } else {
+            return $this->ErrorMessage("Data Empty", "", Response::HTTP_NO_CONTENT);
+        }
+    }
     public function store(Request $request)
     {
 

@@ -62,6 +62,7 @@ Route::prefix('products')->group(function () {
         Route::post('/product', 'store')->middleware('auth:sanctum');
         Route::put('/product', 'update')->middleware('auth:sanctum');
         Route::delete('/product', 'destroy')->middleware('auth:sanctum');
+        Route::get('/', 'list')->middleware('auth:sanctum');
     });
     Route::prefix('review')->group(function () {
         Route::controller(ReviewController::class)->group(function () {
