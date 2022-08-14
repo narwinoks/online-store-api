@@ -4,6 +4,7 @@ namespace App\Models\Api\Products;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
@@ -28,5 +29,9 @@ class Product extends Model
     public function review()
     {
         return $this->hasMany(review::class);
+    }
+    public function tag()
+    {
+        return $this->hasMany(Tag::class);
     }
 }

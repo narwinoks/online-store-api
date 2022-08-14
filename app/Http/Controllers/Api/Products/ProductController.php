@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Products;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Products\Detail\ProductResource as DetailProductResource;
 use App\Http\Resources\Products\ProductCollection;
 use App\Http\Resources\Products\ProductResource;
 use App\Models\Api\Products\Category;
@@ -18,7 +19,9 @@ class ProductController extends BaseController
 {
     public function index(Category $category)
     {
-        $products = $category->Product()->with('image')->paginate(20);
+        // $product = Product::with('tag')->get();
+        // dd($product);
+        $products = $category->Product()->with('image.tag')->paginate(20);
         $response = new ProductCollection($products);
         if ($response) {
             return $this->Response($response, "Successfully", Response::HTTP_OK);
@@ -74,7 +77,7 @@ class ProductController extends BaseController
     {
         $data = $product::with('review')->get();
         // dd($product);
-        $response = new ProductResource($product);
+        $response = new DetailProductResource($product);
         if ($response) {
             return $this->Response($response, "Successfully", Response::HTTP_OK);
         } else {

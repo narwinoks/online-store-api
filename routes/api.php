@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Products\CategoryController;
 use App\Http\Controllers\Api\Products\ImageController;
 use App\Http\Controllers\Api\Products\ProductController;
 use App\Http\Controllers\Api\Products\ReviewController;
+use App\Http\Controllers\Api\Products\TagController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Models\Api\Products\Category;
 use Illuminate\Http\Request;
@@ -61,28 +62,20 @@ Route::prefix('products')->group(function () {
         Route::post('/product', 'store')->middleware('auth:sanctum');
         Route::put('/product', 'update')->middleware('auth:sanctum');
         Route::delete('/product', 'destroy')->middleware('auth:sanctum');
-        Route::prefix('review')->group(function () {
-            Route::controller(ReviewController::class)->group(function () {
-                Route::post('/', 'store')->middleware('auth:sanctum');
-                Route::delete('/', 'destroy')->middleware('auth:sanctum');
-            });
+    });
+    Route::prefix('review')->group(function () {
+        Route::controller(ReviewController::class)->group(function () {
+            Route::post('/', 'store')->middleware('auth:sanctum');
+            Route::delete('/', 'destroy')->middleware('auth:sanctum');
         });
     });
-
+    Route::prefix('tags')->group(function () {
+        Route::controller(TagController::class)->group(function () {
+            Route::post('/', 'store')->middleware('auth:sanctum');
+            Route::delete('/', 'destory')->middleware('auth:sanctum');
+        });
+    });
     Route::controller(ImageController::class)->group(function () {
         Route::post('/image', 'store');
     });
-    // Route::controller(ProductController::class)->group(function () {
-    //     Route::prefix('list')->group(function () {
-    //         Route::get('/{category:slug}', function (Category $category) {
-    //             $product =   $category->Product->load('category');
-    //             dd($product);
-    //         });
-
-    //         Route::get('tes', function () {
-    //             return "okke";
-    //         });
-    //     });
-    // });
-    // Route::prefix('');
 });
