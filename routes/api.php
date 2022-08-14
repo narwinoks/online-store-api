@@ -74,6 +74,7 @@ Route::prefix('products')->group(function () {
         Route::controller(TagController::class)->group(function () {
             Route::post('/', 'store')->middleware('auth:sanctum');
             Route::delete('/', 'destory')->middleware('auth:sanctum');
+            Route::get('/{title}', 'serach')->middleware('auth:sanctum');
         });
     });
     Route::controller(ImageController::class)->group(function () {

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api\Products;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Tag\TagResource;
 use App\Models\Api\Products\Tag;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -41,6 +43,17 @@ class TagController extends BaseController
         if ($data) {
             $data->delete();
             return $this->Response("", "Successfully", Response::HTTP_OK);
+        }
+    }
+
+    public function serach($title)
+    {
+        // dd($title);
+        $data = Tag::where('title', 'LIKE', '%' . $title . '%')->get();
+        // dd($data);
+        $response = TagResource::Collection($data);
+        if ($data) {
+            return $this->Response($response, "successfully", Response::HTTP_OK);
         }
     }
 }
