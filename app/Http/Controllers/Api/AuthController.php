@@ -48,7 +48,7 @@ class AuthController extends BaseController
         $data = $request->all();
         if (is_numeric($request->register)) {
             $data['mobile'] = $request->register;
-            $rules = 'required|unique:App\Models\Api\User,mobile[users.mobile]|regex:/(01)[0-9]{9}/';
+            $rules = 'required|unique:App\Models\Api\User,mobile';
         } else {
             $data['email'] = $request->register;
             $rules = 'required|email|unique:App\Models\Api\User,email';

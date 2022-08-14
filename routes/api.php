@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\GoogleController;
 use App\Http\Controllers\Api\Products\CategoryController;
 use App\Http\Controllers\Api\Products\ImageController;
 use App\Http\Controllers\Api\Products\ProductController;
+use App\Http\Controllers\Api\Products\ReviewController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Models\Api\Products\Category;
 use Illuminate\Http\Request;
@@ -56,12 +57,15 @@ Route::prefix('products')->group(function () {
         Route::prefix('list')->group(function () {
             Route::get('/{category:slug}', 'index')->middleware('auth:sanctum');
         });
-        Route::get('/{product:slug}', 'show')->middleware('auth:sanctum');
+        Route::get('/{product:slug}', 'show');
         Route::post('/product', 'store')->middleware('auth:sanctum');
         Route::put('/product', 'update')->middleware('auth:sanctum');
         Route::delete('/product', 'destroy')->middleware('auth:sanctum');
-        Route::get('/list', function () {
-            return "okee";
+        Route::prefix('review')->group(function () {
+            Route::controller(ReviewController::class)->group(function () {
+                Route::post('/', 'store')->middleware('auth:sanctum');
+                Route::delete('/', 'destroy')->middleware('auth:sanctum');
+            });
         });
     });
 

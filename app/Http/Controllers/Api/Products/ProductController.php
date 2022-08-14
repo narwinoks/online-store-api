@@ -72,6 +72,8 @@ class ProductController extends BaseController
 
     public function show(Product $product)
     {
+        $data = $product::with('review')->get();
+        // dd($product);
         $response = new ProductResource($product);
         if ($response) {
             return $this->Response($response, "Successfully", Response::HTTP_OK);

@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Products;
 
 use App\Http\Resources\Image\ImageResource;
+use App\Http\Resources\Reviews\ReviewResource;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -32,7 +33,9 @@ class ProductResource extends JsonResource
             'publishedAt' => $this->created_at->diffForHumans(),
             'startAt' => $this->startAt,
             'endAt' => $this->endAt,
-            'image' => ImageResource::collection($this->image)
+            'image' => ImageResource::collection($this->image),
+            'review' => ReviewResource::collection($this->review)
+            // 'review'=>
         ];
     }
 }
