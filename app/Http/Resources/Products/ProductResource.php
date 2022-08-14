@@ -29,7 +29,7 @@ class ProductResource extends JsonResource
             'quantity' => $this->quantity,
             'shop' => $this->shop,
             'content' => $this->content,
-            'publishedAt' => $this->publishedAt->diffForHumans(),
+            'publishedAt' => $this->created_at->diffForHumans(),
             'startAt' => $this->startAt,
             'endAt' => $this->endAt,
             'image' => ImageResource::collection($this->image)

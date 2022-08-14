@@ -29,7 +29,7 @@ class ProductSeeder extends Seeder
             'quantity' => 10,
             'shop' => 1,
             'content' => 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.',
-            'publishedAt' => Carbon::today(),
+            // 'publishedAt' => Carbon::today(),
             'startAt' => Carbon::today(),
             'endAt' => Carbon::today(),
         ]);
@@ -37,7 +37,7 @@ class ProductSeeder extends Seeder
             'user_id' => 1,
             'category_id' => 1,
             'title' => 'BAJU HIJRAH ORIGINAL SHIFT',
-            'slug' => 'baju-hijrah-original-shift',
+            'slug' => 'baju-hijrah-original-shift2',
             'Summary' => 'BAJU HIJRAH ORIGINAL SHIFT',
             'sku' => 10,
             'price' => 80000,
@@ -45,7 +45,7 @@ class ProductSeeder extends Seeder
             'quantity' => 10,
             'shop' => 1,
             'content' => 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.',
-            'publishedAt' => Carbon::today(),
+            // 'publishedAt' => Carbon::today(),
             'startAt' => Carbon::today(),
             'endAt' => Carbon::today(),
         ]);

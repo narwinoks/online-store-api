@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('category_id');
             $table->string('title');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->string('Summary');
             $table->integer('sku');
             $table->double('price');
@@ -26,9 +26,10 @@ return new class extends Migration
             $table->integer('quantity');
             $table->enum('shop', [1, 0]);
             $table->text('content');
-            $table->timestamp('publishedAt');
+            // $table->timestamp('publishedAt');
             $table->timestamp('startAt');
             $table->timestamp('endAt');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -54,9 +54,12 @@ Route::prefix('products')->group(function () {
     });
     Route::controller(ProductController::class)->group(function () {
         Route::prefix('list')->group(function () {
-            Route::get('/{category:slug}', 'index');
+            Route::get('/{category:slug}', 'index')->middleware('auth:sanctum');
         });
-        Route::get('/{product:slug}', 'show');
+        Route::get('/{product:slug}', 'show')->middleware('auth:sanctum');
+        Route::post('/product', 'store')->middleware('auth:sanctum');
+        Route::put('/product', 'update')->middleware('auth:sanctum');
+        Route::delete('/product', 'destroy')->middleware('auth:sanctum');
         Route::get('/list', function () {
             return "okee";
         });
