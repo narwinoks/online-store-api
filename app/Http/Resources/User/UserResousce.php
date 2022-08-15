@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\User;
 
+use App\Http\Resources\Addrress\AddressResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResousce extends JsonResource
@@ -22,7 +23,8 @@ class UserResousce extends JsonResource
             'lastNane' => $this->lastName,
             'mobile' => $this->mobile,
             'email' => $this->email,
-            'avatar' => asset('avatar/user-profile') .'/'. $this->avatar,
+            'avatar' => asset('avatar/user-profile') . '/' . $this->avatar,
+            'address' => AddressResource::collection($this->address),
             'joinAt' => $this->created_at->diffForHumans()
         ];
     }

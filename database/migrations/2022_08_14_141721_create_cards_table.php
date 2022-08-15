@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('cards', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->string('key');
+            $table->foreignId('product_id');
+            $table->integer('sku');
             $table->timestamps();
         });
     }
