@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Products;
+namespace App\Http\Resources\Addrress;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class ProductCollection extends ResourceCollection
+class AddressCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -14,7 +14,8 @@ class ProductCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-
-        return ProductResource::collection($this->collection);
+        return [
+            'data'=>AddressResource::collection($this->collection)
+        ];
     }
 }

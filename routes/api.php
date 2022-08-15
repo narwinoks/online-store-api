@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AddressController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\GoogleController;
 use App\Http\Controllers\Api\Products\CategoryController;
@@ -44,7 +45,15 @@ Route::prefix('auth')->group(function () {
         Route::put('/', 'update')->middleware('auth:sanctum');
     });
 });
-
+Route::prefix('user')->group(function () {
+    Route::controller(AddressController::class)->group(function () {
+        Route::prefix('address')->group(function () {
+            Route::post('/', 'store')->middleware('auth:sanctum');
+            Route::delete('/', 'destroy')->middleware('auth:sanctum');
+            Route::put('/', 'update')->middleware('auth:sanctum');
+        });
+    });
+});
 Route::prefix('products')->group(function () {
     Route::controller(CategoryController::class)->group(function () {
         Route::prefix('category')->group(function () {

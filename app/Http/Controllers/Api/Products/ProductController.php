@@ -22,6 +22,7 @@ class ProductController extends BaseController
         // $product = Product::with('tag')->get();
         // dd($product);
         $products = $category->Product()->with('image.tag')->paginate(20);
+        // $response = ProductResource::collection($products);
         $response = new ProductCollection($products);
         if ($response) {
             return $this->Response($response, "Successfully", Response::HTTP_OK);
