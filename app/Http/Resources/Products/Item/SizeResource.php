@@ -1,13 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Variants;
+namespace App\Http\Resources\Products\Item;
 
-use App\Http\Resources\Color\ColorResource;
-use App\Http\Resources\Products\Item\SizeResource as ItemSizeResource;
-use App\Http\Resources\Size\SizeResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class VariantResource extends JsonResource
+class SizeResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,8 +16,11 @@ class VariantResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'color' => new ColorResource($this->color),
-            'size' => ItemSizeResource::collection($this->item)
+            'size' => $this->size->name,
+            'sku' => $this->sku,
+            'price' => $this->price,
+            'discount' => $this->discount,
+            'quantity' => $this->quantity
         ];
     }
 }

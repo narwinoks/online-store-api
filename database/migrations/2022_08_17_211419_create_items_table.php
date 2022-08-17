@@ -13,10 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('variants', function (Blueprint $table) {
+        Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id');
-            $table->foreignId('color_id');
+            $table->foreignId('size_id');
+            $table->foreignId('variant_id');
+            $table->string('sku');
+            $table->double('price');
+            $table->double('discount')->default(0);
+            $table->integer('quantity');
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('variants');
+        Schema::dropIfExists('items');
     }
 };

@@ -9,8 +9,12 @@ class Size extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    public function variant()
+    // public function variant()
+    // {
+    //     return $this->hasMany(Variant::class);
+    // }
+    public function item()
     {
-        return $this->hasMany(Variant::class);
+        return $this->hasMany(Item::class);
     }
 }

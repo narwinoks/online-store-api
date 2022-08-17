@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\Products\ProductController;
 use App\Http\Controllers\Api\Products\VariantsController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,4 +19,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/tes', [VariantsController::class, 'tes']);
+Route::get('/tes', [ProductController::class, 'tes']);

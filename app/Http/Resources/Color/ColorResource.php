@@ -15,6 +15,7 @@ class ColorResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'color' => $this->color,
             'code' => $this->code_Color
         ];

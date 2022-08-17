@@ -17,8 +17,13 @@ class Variant extends Model
     {
         return $this->belongsTo(Color::class);
     }
-    public function size()
+    // public function size()
+    // {
+    //     return $this->belongsTo(Size::class);
+    // }
+
+    public function item()
     {
-        return $this->belongsTo(Size::class);
+        return $this->hasMany(Item::class);
     }
 }

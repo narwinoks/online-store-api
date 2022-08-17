@@ -9,6 +9,7 @@ use App\Http\Resources\Products\ProductCollection;
 use App\Http\Resources\Products\ProductResource;
 use App\Models\Api\Products\Category;
 use App\Models\Api\Products\Product;
+use App\Models\Api\Products\Variant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +22,7 @@ class ProductController extends BaseController
     {
         // $product = Product::with('tag')->get();
         // dd($product);
-        $products = $category->Product()->with('image.tag')->paginate(20);
+        $products = $category->Product()->with('image.tag.variant')->paginate(20);
         // $response = ProductResource::collection($products);
         $response = new ProductCollection($products);
         if ($response) {
@@ -84,7 +85,7 @@ class ProductController extends BaseController
     {
         $data = $product::with('review')->get();
         // dd($product);
-        $response = new DetailProductResource($product);
+        $response = new ProductResource($product);
         if ($response) {
             return $this->Response($response, "Successfully", Response::HTTP_OK);
         } else {
@@ -140,5 +141,11 @@ class ProductController extends BaseController
         } else {
             return $this->ErrorMessage("", "something wrong", Response::HTTP_NOT_FOUND);
         }
+    }
+
+    public function tes()
+    {
+        dd(Product::with('variant')->get());
+        // dd(Variant::with('item')->get());
     }
 }

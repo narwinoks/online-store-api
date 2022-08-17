@@ -27,11 +27,12 @@ class ProductResource extends JsonResource
             'slug' => $this->slug,
             'Summary' => $this->Summary,
             'content' => $this->content,
-            'variant' => VariantResource::collection($this->variant),
             'publishedAt' => $this->created_at->diffForHumans(),
+            'size' => $this->item,
             'shop' => $this->shop,
             'startAt' => $this->startAt,
             'endAt' => $this->endAt,
+            'variants' => VariantResource::collection($this->variant),
             'image' => ImageResource::collection($this->image),
             'tag' => TagResource::collection($this->tag)
         ];

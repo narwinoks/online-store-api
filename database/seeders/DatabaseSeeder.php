@@ -26,7 +26,9 @@ class DatabaseSeeder extends Seeder
             ReviewSeeder::class,
             TypeSeeder::class,
             ColorSeeder::class,
-            SizeSeeder::class
+            VariantSeeder::class,
+            SizeSeeder::class,
+            ItemSeeder::class
 
         ]);
     }
