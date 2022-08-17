@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Api\AddressController;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\Card\CardController;
+use App\Http\Controllers\Api\Cart\CartController;
 use App\Http\Controllers\Api\GoogleController;
 use App\Http\Controllers\Api\Products\CategoryController;
 use App\Http\Controllers\Api\Products\ColorController;
@@ -125,8 +125,8 @@ Route::prefix('products')->group(function () {
     Route::get('tes', [SizeController::class, 'index']);
 });
 
-Route::prefix('card')->group(function () {
-    Route::controller(CardController::class)->group(function () {
+Route::prefix('cart')->group(function () {
+    Route::controller(CartController::class)->group(function () {
         Route::post('/', 'store')->middleware('auth:sanctum');
         Route::get('/', 'index')->middleware('auth:sanctum');
     });

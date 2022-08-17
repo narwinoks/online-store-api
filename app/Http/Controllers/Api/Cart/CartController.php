@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Api\Card;
+namespace App\Http\Controllers\Api\Cart;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
-use App\Models\Api\Card\Card;
+use App\Models\Api\Cart\Cart;
 use App\Models\Api\Products\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
-class CardController extends BaseController
+class CartController extends BaseController
 {
     public function index(Request $request)
     {
-        $card = Card::with('product')->get();
+        $card = Cart::with('product')->get();
         dd($card);
     }
 
@@ -28,7 +28,7 @@ class CardController extends BaseController
         }
         $product = Product::find($request->product_id);
         // return $product;
-        $data = Card::create([
+        $data = Cart::create([
             'user_id' => $request->user()->id,
             'product_id' => $request->product_id,
             'sku' => 0,

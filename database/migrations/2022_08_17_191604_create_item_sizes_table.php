@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cards', function (Blueprint $table) {
+        Schema::create('item_sizes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('product_id');
-            $table->foreignId('variant_id');
-            $table->integer('sku');
+            $table->foreignId('item_color_id');
+            $table->string('sku');
             $table->double('price');
             $table->double('discount');
+            $table->integer('quantity');
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cards');
+        Schema::dropIfExists('item_sizes');
     }
 };
