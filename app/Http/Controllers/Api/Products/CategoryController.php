@@ -15,10 +15,16 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends BaseController
 {
-    public function index()
+    public function index($id = null)
     {
-        $data = Category::where('parent_id', null)->with('children')->get();
-        $response = new CategoryCollection($data);
+        if (!empty($id)) {
+            $data = Category::find($id);
+            $response = new CategoryResource($data);
+        } else {
+
+            $data = Category::where('parent_id', null)->with('children')->get();
+            $response = new CategoryCollection($data);
+        }
         return  $this->Response($response, "successfully", Response::HTTP_OK);
     }
     public function store(Request $request)

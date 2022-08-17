@@ -2,6 +2,7 @@
 
 namespace App\Models\Api\Products;
 
+use App\Models\Api\Card\Card;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -33,5 +34,10 @@ class Product extends Model
     public function tag()
     {
         return $this->hasMany(Tag::class);
+    }
+
+    public function card()
+    {
+        return $this->hasMany(Card::class);
     }
 }

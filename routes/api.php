@@ -2,14 +2,17 @@
 
 use App\Http\Controllers\Api\AddressController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\Card\CardController;
 use App\Http\Controllers\Api\GoogleController;
 use App\Http\Controllers\Api\Products\CategoryController;
 use App\Http\Controllers\Api\Products\ImageController;
 use App\Http\Controllers\Api\Products\ProductController;
 use App\Http\Controllers\Api\Products\ReviewController;
+use App\Http\Controllers\Api\Products\SizeController;
 use App\Http\Controllers\Api\Products\TagController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Models\Api\Products\Category;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -57,7 +60,7 @@ Route::prefix('user')->group(function () {
 Route::prefix('products')->group(function () {
     Route::controller(CategoryController::class)->group(function () {
         Route::prefix('category')->group(function () {
-            Route::get('/', 'index');
+            Route::get('/{id?}', 'index');
             Route::post('/', 'store')->middleware('auth:sanctum');
             Route::put('/', 'update')->middleware('auth:sanctum');
             Route::delete('/', 'destroy')->middleware('auth:sanctum');
@@ -89,4 +92,24 @@ Route::prefix('products')->group(function () {
     Route::controller(ImageController::class)->group(function () {
         Route::post('/image', 'store');
     });
+    Route::prefix('item')->group(function () {
+        Route::prefix('size')->group(function () {
+            Route::controller(SizeController::class)->group(function () {
+                Route::get('{id?}', 'index');
+                Route::post('/', 'store');
+                Route::delete('/', 'destroy');
+                Route::get('/{id}', 'show');
+                Route::put('/', 'update');
+            });
+        });
+    });
+    Route::get('tes', [SizeController::class, 'index']);
 });
+
+Route::prefix('card')->group(function () {
+    Route::controller(CardController::class)->group(function () {
+        Route::post('/', 'store')->middleware('auth:sanctum');
+        Route::get('/', 'index')->middleware('auth:sanctum');
+    });
+});
+// Route::get('tes', [SizeController::class, 'index']);
