@@ -40,4 +40,8 @@ class Product extends Model
     {
         return $this->hasMany(Card::class);
     }
+    public function variant()
+    {
+        return $this->hasMany(Variant::class);
+    }
 }

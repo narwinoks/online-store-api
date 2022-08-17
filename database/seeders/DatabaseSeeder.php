@@ -24,7 +24,10 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             ProductSeeder::class,
             ReviewSeeder::class,
-            TypeSeeder::class
+            TypeSeeder::class,
+            ColorSeeder::class,
+            SizeSeeder::class
+
         ]);
     }
 }

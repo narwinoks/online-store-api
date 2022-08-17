@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\Products\ProductController;
 use App\Http\Controllers\Api\Products\ReviewController;
 use App\Http\Controllers\Api\Products\SizeController;
 use App\Http\Controllers\Api\Products\TagController;
+use App\Http\Controllers\Api\Products\VariantsController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Models\Api\Products\Category;
 use Carbon\Carbon;
@@ -112,6 +113,14 @@ Route::prefix('products')->group(function () {
                 Route::put('/', 'update');
             });
         });
+
+        Route::prefix('variants')->group(function () {
+            Route::controller(VariantsController::class)->group(function () {
+                Route::post('/', 'store');
+                Route::put('/', 'update');
+                Route::delete('/', 'destroy');
+            });
+        });
     });
     Route::get('tes', [SizeController::class, 'index']);
 });
@@ -122,4 +131,4 @@ Route::prefix('card')->group(function () {
         Route::get('/', 'index')->middleware('auth:sanctum');
     });
 });
-// Route::get('tes', [SizeController::class, 'index']);
+Route::get('tes', [VariantsController::class, 'tes']);

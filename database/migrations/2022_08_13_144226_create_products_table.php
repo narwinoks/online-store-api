@@ -20,12 +20,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->string('Summary');
-            $table->integer('sku');
-            $table->double('price');
-            $table->double('discount')->default(0);
-            $table->integer('quantity');
-            $table->enum('shop', [1, 0]);
             $table->text('content');
+            $table->enum('shop', [0, 1])->default(0);
             // $table->timestamp('publishedAt');
             $table->timestamp('startAt');
             $table->timestamp('endAt');

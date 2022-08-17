@@ -5,6 +5,7 @@ namespace App\Http\Resources\Products;
 use App\Http\Resources\Image\ImageResource;
 use App\Http\Resources\Reviews\ReviewResource;
 use App\Http\Resources\Tag\TagResource;
+use App\Http\Resources\Variants\VariantResource;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -25,13 +26,10 @@ class ProductResource extends JsonResource
             'title' => $this->title,
             'slug' => $this->slug,
             'Summary' => $this->Summary,
-            'sku' => $this->sku,
-            'price' => $this->price,
-            'discount' => $this->discount,
-            'quantity' => $this->quantity,
-            'shop' => $this->shop,
             'content' => $this->content,
+            'variant' => VariantResource::collection($this->variant),
             'publishedAt' => $this->created_at->diffForHumans(),
+            'shop' => $this->shop,
             'startAt' => $this->startAt,
             'endAt' => $this->endAt,
             'image' => ImageResource::collection($this->image),
