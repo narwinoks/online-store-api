@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Size;
+namespace App\Http\Resources\Color;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SizeResource extends JsonResource
+class ColorResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,7 +15,8 @@ class SizeResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'name'=>$this->name
+            'color' => $this->color,
+            'code' => $this->code_Color
         ];
     }
 }

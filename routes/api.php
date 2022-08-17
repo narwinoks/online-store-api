@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\Card\CardController;
 use App\Http\Controllers\Api\GoogleController;
 use App\Http\Controllers\Api\Products\CategoryController;
+use App\Http\Controllers\Api\Products\ColorController;
 use App\Http\Controllers\Api\Products\ImageController;
 use App\Http\Controllers\Api\Products\ProductController;
 use App\Http\Controllers\Api\Products\ReviewController;
@@ -95,6 +96,15 @@ Route::prefix('products')->group(function () {
     Route::prefix('item')->group(function () {
         Route::prefix('size')->group(function () {
             Route::controller(SizeController::class)->group(function () {
+                Route::get('{id?}', 'index');
+                Route::post('/', 'store');
+                Route::delete('/', 'destroy');
+                Route::get('/{id}', 'show');
+                Route::put('/', 'update');
+            });
+        });
+        Route::prefix('color')->group(function () {
+            Route::controller(ColorController::class)->group(function () {
                 Route::get('{id?}', 'index');
                 Route::post('/', 'store');
                 Route::delete('/', 'destroy');
