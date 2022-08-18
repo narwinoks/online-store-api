@@ -22,7 +22,7 @@ class ProductController extends BaseController
     {
         // $product = Product::with('tag')->get();
         // dd($product);
-        $products = $category->Product()->with('image.tag.variant')->paginate(20);
+        $products = $category->Product()->with('tag.image')->paginate(20);
         // $response = ProductResource::collection($products);
         $response = new ProductCollection($products);
         if ($response) {
@@ -48,12 +48,9 @@ class ProductController extends BaseController
         // dd($request->user()->id);
         $data = $request->all();
         $validator = Validator::make($data, [
+            'user_id' => $request->user()->id,
             'category_id' => 'required',
             'title' => 'required|max:50',
-            'sku' => 'required|integer',
-            'price' => 'required|integer',
-            'discount' => 'integer',
-            'quantity' => 'required|integer',
             'shop' => 'required'
         ]);
 
@@ -67,14 +64,14 @@ class ProductController extends BaseController
             'category_id' => $request->category_id,
             'title' => $request->title,
             'slug' => Str::slug($request->title, '-'),
-            'Summary' => Str::limit($request->content, 100),
+            'Summary' => $request->Summary,
             'shop' => $request->shop,
             'content' => $request->content,
             'startAt' => $request->startAt,
             'endAt' => $request->endAt
         ]);
 
-        if ($model) {
+        if ($model->wasRecentlyCreated) {
             return $this->Response($model, "Successfully", Response::HTTP_OK);
         } else {
             return $this->ErrorMessage("", ["error" => "something wrong"], Response::HTTP_NOT_MODIFIED);
