@@ -12,14 +12,19 @@ use Illuminate\Support\Str;
 
 class VariantsController extends BaseController
 {
+    public function show($id)
+    {
+        $data = Variant::find($id);
+        if ($data) {
+            return $this->Response($data, "successfully", Response::HTTP_OK);
+        }
+        return $this->ErrorMessage("Data Not Found", "", Response::HTTP_BAD_REQUEST);
+    }
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'product_id' => 'required',
             'color_id' => 'required',
-            'sku' => 'integer',
-            'price' => 'integer',
-            'quantity' => 'integer'
         ]);
         if ($validator->fails()) {
             return $this->ErrorMessage("", $validator->errors(), Response::HTTP_BAD_REQUEST);
@@ -27,11 +32,6 @@ class VariantsController extends BaseController
         $model = Variant::create([
             'product_id' => $request->product_id,
             'color_id' => $request->color_id,
-            'size_id' => $request->size_id,
-            'sku' => Str::random(16),
-            'price' => $request->price,
-            'discount' => $request->discount,
-            'quantity' => $request->quantity
         ]);
         if ($model->wasRecentlyCreated) {
             # code...
@@ -45,9 +45,6 @@ class VariantsController extends BaseController
         $validator = Validator::make($request->all(), [
             'product_id' => 'required',
             'color_id' => 'required',
-            'sku' => 'integer',
-            'price' => 'integer',
-            'quantity' => 'integer'
         ]);
         if ($validator->fails()) {
             return $this->ErrorMessage("", $validator->errors(), Response::HTTP_BAD_REQUEST);
@@ -57,10 +54,6 @@ class VariantsController extends BaseController
             'id' => $request->id,
             'product_id' => $request->product_id,
             'color_id' => $request->color_id,
-            'size_id' => $request->size_id,
-            'price' => $request->price,
-            'discount' => $request->discount,
-            'quantity' => $request->quantity
         ]);
         if ($data) {
             # code...

@@ -45,10 +45,10 @@ class ProductController extends BaseController
     public function store(Request $request)
     {
 
+        // return "okee";
         // dd($request->user()->id);
         $data = $request->all();
         $validator = Validator::make($data, [
-            'user_id' => $request->user()->id,
             'category_id' => 'required',
             'title' => 'required|max:50',
             'shop' => 'required'
@@ -64,7 +64,7 @@ class ProductController extends BaseController
             'category_id' => $request->category_id,
             'title' => $request->title,
             'slug' => Str::slug($request->title, '-'),
-            'Summary' => $request->Summary,
+            'Summary' => Str::limit($request->content, 100),
             'shop' => $request->shop,
             'content' => $request->content,
             'startAt' => $request->startAt,

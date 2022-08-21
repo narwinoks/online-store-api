@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Products\CategoryController;
 use App\Http\Controllers\Api\Products\ColorController;
 use App\Http\Controllers\Api\Products\ImageController;
 use App\Http\Controllers\Api\Products\ProductController;
+use App\Http\Controllers\Api\Products\ProductItemController;
 use App\Http\Controllers\Api\Products\ReviewController;
 use App\Http\Controllers\Api\Products\SizeController;
 use App\Http\Controllers\Api\Products\TagController;
@@ -100,7 +101,6 @@ Route::prefix('products')->group(function () {
                 Route::get('{id?}', 'index');
                 Route::post('/', 'store');
                 Route::delete('/', 'destroy');
-                Route::get('/{id}', 'show');
                 Route::put('/', 'update');
             });
         });
@@ -109,7 +109,6 @@ Route::prefix('products')->group(function () {
                 Route::get('{id?}', 'index');
                 Route::post('/', 'store');
                 Route::delete('/', 'destroy');
-                Route::get('/{id}', 'show');
                 Route::put('/', 'update');
             });
         });
@@ -119,6 +118,15 @@ Route::prefix('products')->group(function () {
                 Route::post('/', 'store');
                 Route::put('/', 'update');
                 Route::delete('/', 'destroy');
+                Route::get('/{id}', 'show');
+            });
+        });
+        Route::prefix('items')->group(function () {
+            Route::controller(ProductItemController::class)->group(function () {
+                Route::post('/', 'store');
+                Route::put('/', 'update');
+                Route::delete('/', 'destroy');
+                Route::get('/{id}', 'show');
             });
         });
     });
