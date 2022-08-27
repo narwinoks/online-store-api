@@ -1,0 +1,38 @@
+{
+    "sourceFile": "app/Models/Api/Products/Product.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1661181678973,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1661184697953,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,4 +40,5 @@\n     {\n         return $this->hasMany(Variant::class);\n     }\n }\n+\n"
+                },
+                {
+                    "date": 1661184703083,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,6 +39,9 @@\n     public function variant()\n     {\n         return $this->hasMany(Variant::class);\n     }\n+\n+\n+    public function \n }\n \n"
+                },
+                {
+                    "date": 1661184714683,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,7 +41,9 @@\n         return $this->hasMany(Variant::class);\n     }\n \n \n-    public function \n+    public function cart(){\n+        return $this->ha\n+    }\n }\n \n"
+                },
+                {
+                    "date": 1661184722158,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,8 +42,8 @@\n     }\n \n \n     public function cart(){\n-        return $this->ha\n+        return $this->hasMany()\n     }\n }\n \n"
+                },
+                {
+                    "date": 1661184732697,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n namespace App\\Models\\Api\\Products;\n \n use App\\Models\\Api\\Card\\Card;\n+use App\\Models\\Api\\Cart\\Cart;\n use Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\n use Illuminate\\Database\\Eloquent\\Model;\n use Illuminate\\Database\\Eloquent\\Relations\\HasMany;\n use Illuminate\\Database\\Eloquent\\SoftDeletes;\n@@ -42,8 +43,8 @@\n     }\n \n \n     public function cart(){\n-        return $this->hasMany()\n+        return $this->hasMany(Cart::class)\n     }\n }\n \n"
+                }
+            ],
+            "date": 1661181678973,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Models\\Api\\Products;\n\nuse App\\Models\\Api\\Card\\Card;\nuse Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\nuse Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Database\\Eloquent\\Relations\\HasMany;\nuse Illuminate\\Database\\Eloquent\\SoftDeletes;\n\nclass Product extends Model\n{\n    use HasFactory;\n    use SoftDeletes;\n    protected $guarded = [];\n    protected $softDelete = true;\n    protected $with = ['category'];\n    public function category()\n    {\n        return $this->belongsTo(Category::class);\n    }\n    public function getRouteKeyName()\n    {\n        return 'slug';\n    }\n    public function image()\n    {\n        return $this->hasMany(Image::class);\n    }\n    public function review()\n    {\n        return $this->hasMany(review::class);\n    }\n    public function tag()\n    {\n        return $this->hasMany(Tag::class);\n    }\n\n    public function variant()\n    {\n        return $this->hasMany(Variant::class);\n    }\n}\n"
+        }
+    ]
+}

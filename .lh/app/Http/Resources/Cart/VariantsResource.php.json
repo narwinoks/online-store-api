@@ -1,0 +1,34 @@
+{
+    "sourceFile": "app/Http/Resources/Cart/VariantsResource.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1661560354660,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1661560367518,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,9 @@\n      */\n     public function toArray($request)\n     {\n         return [\n-            'id'\n+            'id'=>$this->id,\n+            'color'=>$this->color\n         ]\n     }\n }\n"
+                },
+                {
+                    "date": 1661560450712,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,8 @@\n     public function toArray($request)\n     {\n         return [\n             'id'=>$this->id,\n-            'color'=>$this->color\n-        ]\n+            'color'=>$this->color->name\n+        ];\n     }\n }\n"
+                },
+                {
+                    "date": 1661560571236,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,8 @@\n     public function toArray($request)\n     {\n         return [\n             'id'=>$this->id,\n-            'color'=>$this->color->name\n+            'color'=>$this->color\n         ];\n     }\n }\n"
+                },
+                {
+                    "date": 1661560588530,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,8 @@\n     public function toArray($request)\n     {\n         return [\n             'id'=>$this->id,\n-            'color'=>$this->color\n+            'color'=>$this->color->color\n         ];\n     }\n }\n"
+                }
+            ],
+            "date": 1661560354660,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Resources\\Cart;\n\nuse Illuminate\\Http\\Resources\\Json\\JsonResource;\n\nclass VariantsResource extends JsonResource\n{\n    /**\n     * Transform the resource into an array.\n     *\n     * @param  \\Illuminate\\Http\\Request  $request\n     * @return array|\\Illuminate\\Contracts\\Support\\Arrayable|\\JsonSerializable\n     */\n    public function toArray($request)\n    {\n        return [\n            'id'\n        ]\n    }\n}\n"
+        }
+    ]
+}

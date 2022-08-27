@@ -18,9 +18,10 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('product_id');
             $table->foreignId('variant_id');
-            $table->integer('sku');
-            $table->double('price');
-            $table->double('discount');
+            $table->foreignId('item_id');
+            // $table->integer('sku');
+            // $table->double('price');
+            $table->double('discount')->nullable()->default(0);
             $table->timestamps();
         });
     }

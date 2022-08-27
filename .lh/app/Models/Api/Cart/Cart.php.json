@@ -1,0 +1,58 @@
+{
+    "sourceFile": "app/Models/Api/Cart/Cart.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 10,
+            "patches": [
+                {
+                    "date": 1661181528512,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1661181534528,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,6 +14,6 @@\n     {\n         return $this->belongsTo(Product::class);\n     }\n \n-    public function\n+    public function variant()\n }\n"
+                },
+                {
+                    "date": 1661181543958,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,6 +14,8 @@\n     {\n         return $this->belongsTo(Product::class);\n     }\n \n-    public function variant()\n+    public function variant(){\n+        return $this->belongsTo()\n+    }\n }\n"
+                },
+                {
+                    "date": 1661181550577,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,7 +15,7 @@\n         return $this->belongsTo(Product::class);\n     }\n \n     public function variant(){\n-        return $this->belongsTo()\n+        return $this->belongsTo(var)\n     }\n }\n"
+                },
+                {
+                    "date": 1661181556272,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,7 +15,7 @@\n         return $this->belongsTo(Product::class);\n     }\n \n     public function variant(){\n-        return $this->belongsTo(var)\n+        return $this->belongsTo(Varian)\n     }\n }\n"
+                },
+                {
+                    "date": 1661181684514,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,20 +2,17 @@\n \n namespace App\\Models\\Api\\Cart;\n \n use App\\Models\\Api\\Products\\Product;\n+use App\\Models\\Api\\Products\\Variant;\n use Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\n use Illuminate\\Database\\Eloquent\\Model;\n \n class Cart extends Model\n {\n     use HasFactory;\n     protected $guarded = [];\n-    public function product()\n-    {\n-        return $this->belongsTo(Product::class);\n-    }\n-\n+ \n     public function variant(){\n-        return $this->belongsTo(Varian)\n+        return $this->belongsTo(Variant::class);\n     }\n }\n"
+                },
+                {
+                    "date": 1661183103666,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n class Cart extends Model\n {\n     use HasFactory;\n     protected $guarded = [];\n- \n-    public function variant(){\n-        return $this->belongsTo(Variant::class);\n-    }\n+\n+    // public function variant(){\n+    //     return $this->belongsTo(Variant::class);\n+    // }\n }\n"
+                },
+                {
+                    "date": 1661183419942,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,9 @@\n class Cart extends Model\n {\n     use HasFactory;\n     protected $guarded = [];\n+    pro\n \n     // public function variant(){\n     //     return $this->belongsTo(Variant::class);\n     // }\n"
+                },
+                {
+                    "date": 1661183426569,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n class Cart extends Model\n {\n     use HasFactory;\n     protected $guarded = [];\n-    pro\n+    protected $table='cards'\n \n     // public function variant(){\n     //     return $this->belongsTo(Variant::class);\n     // }\n"
+                },
+                {
+                    "date": 1661183636221,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,10 +10,10 @@\n class Cart extends Model\n {\n     use HasFactory;\n     protected $guarded = [];\n-    protected $table='cards'\n+    protected $table='cards';\n \n-    // public function variant(){\n-    //     return $this->belongsTo(Variant::class);\n-    // }\n-}\n+//     // public function variant(){\n+//     //     return $this->belongsTo(Variant::class);\n+//     // }\n+// }\n"
+                },
+                {
+                    "date": 1661184674570,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,6 +16,6 @@\n     public function variant(){\n         return $this->belongsTo(Variant::class);\n     }\n \n-    public function product\n+    public function product()\n }\n"
+                }
+            ],
+            "date": 1661181528512,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Models\\Api\\Cart;\n\nuse App\\Models\\Api\\Products\\Product;\nuse Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\nuse Illuminate\\Database\\Eloquent\\Model;\n\nclass Cart extends Model\n{\n    use HasFactory;\n    protected $guarded = [];\n    public function product()\n    {\n        return $this->belongsTo(Product::class);\n    }\n\n    public function\n}\n"
+        }
+    ]
+}

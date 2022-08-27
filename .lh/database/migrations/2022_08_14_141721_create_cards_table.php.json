@@ -1,0 +1,38 @@
+{
+    "sourceFile": "database/migrations/2022_08_14_141721_create_cards_table.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1661182593946,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1661182603153,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,12 +15,13 @@\n     {\n         Schema::create('cards', function (Blueprint $table) {\n             $table->id();\n             $table->foreignId('user_id');\n-            $table->foreignId('');\n+            // $table->foreignId('product_id');\n             $table->foreignId('variant_id');\n+            $table->foreignId('variant_id');\n             $table->integer('sku');\n-            $table->double('price');\n+            // $table->double('price');\n             $table->double('discount');\n             $table->timestamps();\n         });\n     }\n"
+                },
+                {
+                    "date": 1661182619589,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,10 +17,10 @@\n             $table->id();\n             $table->foreignId('user_id');\n             // $table->foreignId('product_id');\n             $table->foreignId('variant_id');\n-            $table->foreignId('variant_id');\n-            $table->integer('sku');\n+            $table->foreignId(');\n+            // $table->integer('sku');\n             // $table->double('price');\n             $table->double('discount');\n             $table->timestamps();\n         });\n"
+                },
+                {
+                    "date": 1661183465393,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,12 +17,12 @@\n             $table->id();\n             $table->foreignId('user_id');\n             // $table->foreignId('product_id');\n             $table->foreignId('variant_id');\n-            $table->foreignId(');\n+            $table->foreignId('item_id');\n             // $table->integer('sku');\n             // $table->double('price');\n-            $table->double('discount');\n+            $table->double('discount')->default(0);\n             $table->timestamps();\n         });\n     }\n \n"
+                },
+                {
+                    "date": 1661183534673,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n             $table->foreignId('variant_id');\n             $table->foreignId('item_id');\n             // $table->integer('sku');\n             // $table->double('price');\n-            $table->double('discount')->default(0);\n+            $table->double('discount')->nullable()->default(0);\n             $table->timestamps();\n         });\n     }\n \n"
+                },
+                {
+                    "date": 1661184770844,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n     {\n         Schema::create('cards', function (Blueprint $table) {\n             $table->id();\n             $table->foreignId('user_id');\n-            // $table->foreignId('product_id');\n+            $table->foreignId('product_id');\n             $table->foreignId('variant_id');\n             $table->foreignId('item_id');\n             // $table->integer('sku');\n             // $table->double('price');\n"
+                }
+            ],
+            "date": 1661182593946,
+            "name": "Commit-0",
+            "content": "<?php\n\nuse Illuminate\\Database\\Migrations\\Migration;\nuse Illuminate\\Database\\Schema\\Blueprint;\nuse Illuminate\\Support\\Facades\\Schema;\n\nreturn new class extends Migration\n{\n    /**\n     * Run the migrations.\n     *\n     * @return void\n     */\n    public function up()\n    {\n        Schema::create('cards', function (Blueprint $table) {\n            $table->id();\n            $table->foreignId('user_id');\n            $table->foreignId('');\n            $table->foreignId('variant_id');\n            $table->integer('sku');\n            $table->double('price');\n            $table->double('discount');\n            $table->timestamps();\n        });\n    }\n\n    /**\n     * Reverse the migrations.\n     *\n     * @return void\n     */\n    public function down()\n    {\n        Schema::dropIfExists('cards');\n    }\n};\n"
+        }
+    ]
+}

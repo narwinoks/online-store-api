@@ -1,0 +1,162 @@
+{
+    "sourceFile": "app/Http/Controllers/Api/Cart/CartController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 36,
+            "patches": [
+                {
+                    "date": 1661181514748,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1661181696907,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,10 +13,11 @@\n class CartController extends BaseController\n {\n     public function index(Request $request)\n     {\n-        $card = Cart::with('variants')->get();\n-        dd($card);\n+        $card = Cart::with('variant')->get();\n+        // dd($card);\n+        return $card;\n     }\n \n     public function store(Request $request)\n     {\n"
+                },
+                {
+                    "date": 1661182118851,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n         ]);\n         if ($validator->fails()) {\n             return $this->Response(\"\", $validator->errors(), Response::HTTP_BAD_REQUEST);\n         }\n-        $product = Product::find($request->product_id);\n+        // $product = Product::find($request->product_id);\n         // return $product;\n         $data = Cart::create([\n             'user_id' => $request->user()->id,\n             'variant_id' => $request->variant_id,\n"
+                },
+                {
+                    "date": 1661182559011,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n \n     public function store(Request $request)\n     {\n         $validator = Validator::make($request->all(), [\n-            'variant' => 'required',\n+            'variant_id' => 'required',\n         ]);\n         if ($validator->fails()) {\n             return $this->Response(\"\", $validator->errors(), Response::HTTP_BAD_REQUEST);\n         }\n"
+                },
+                {
+                    "date": 1661182723898,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n         $data = Cart::create([\n             'user_id' => $request->user()->id,\n             'variant_id' => $request->variant_id,\n             'item_id' => $request->item_id,\n-            'discount' => $request->discount\n+            'variant_id' => $request->discount\n         ]);\n \n         if ($data->wasRecentlyCreated) {\n             return $this->Response($data, \"successfully\", Response::HTTP_OK);\n"
+                },
+                {
+                    "date": 1661182912229,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n         $data = Cart::create([\n             'user_id' => $request->user()->id,\n             'variant_id' => $request->variant_id,\n             'item_id' => $request->item_id,\n-            'variant_id' => $request->discount\n+            '' => $request->discount\n         ]);\n \n         if ($data->wasRecentlyCreated) {\n             return $this->Response($data, \"successfully\", Response::HTTP_OK);\n"
+                },
+                {
+                    "date": 1661183031097,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n         $data = Cart::create([\n             'user_id' => $request->user()->id,\n             'variant_id' => $request->variant_id,\n             'item_id' => $request->item_id,\n-            '' => $request->discount\n+            // 'discount' => $request->discount\n         ]);\n \n         if ($data->wasRecentlyCreated) {\n             return $this->Response($data, \"successfully\", Response::HTTP_OK);\n"
+                },
+                {
+                    "date": 1661183058923,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n         $data = Cart::create([\n             'user_id' => $request->user()->id,\n             'variant_id' => $request->variant_id,\n             'item_id' => $request->item_id,\n-            // 'discount' => $request->discount\n+            'discount' => $request->discount\n         ]);\n \n         if ($data->wasRecentlyCreated) {\n             return $this->Response($data, \"successfully\", Response::HTTP_OK);\n"
+                },
+                {
+                    "date": 1661183077663,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n class CartController extends BaseController\n {\n     public function index(Request $request)\n     {\n-        $card = Cart::with('variant')->get();\n+        $card = Cart::all()\n         // dd($card);\n         return $card;\n     }\n \n"
+                },
+                {
+                    "date": 1661183623404,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n class CartController extends BaseController\n {\n     public function index(Request $request)\n     {\n-        $card = Cart::all()\n+        $card = Cart::with('variant');\n         // dd($card);\n         return $card;\n     }\n \n"
+                },
+                {
+                    "date": 1661183675580,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n class CartController extends BaseController\n {\n     public function index(Request $request)\n     {\n-        $card = Cart::with('variant');\n+        $card = Cart::with('variant.product')->get();\n         // dd($card);\n         return $card;\n     }\n \n"
+                },
+                {
+                    "date": 1661183710168,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n class CartController extends BaseController\n {\n     public function index(Request $request)\n     {\n-        $card = Cart::with('variant.product')->get();\n+        $card = Cart::with('variant.item.product')->get();\n         // dd($card);\n         return $card;\n     }\n \n"
+                },
+                {
+                    "date": 1661183722850,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n class CartController extends BaseController\n {\n     public function index(Request $request)\n     {\n-        $card = Cart::with('variant.item.product')->get();\n+        $card = Cart::with('variant.product')->get();\n         // dd($card);\n         return $card;\n     }\n \n"
+                },
+                {
+                    "date": 1661183768323,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,9 @@\n     public function index(Request $request)\n     {\n         $card = Cart::with('variant.product')->get();\n         // dd($card);\n+        \n         return $card;\n     }\n \n     public function store(Request $request)\n"
+                },
+                {
+                    "date": 1661183776487,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n     public function index(Request $request)\n     {\n         $card = Cart::with('variant.product')->get();\n         // dd($card);\n-        \n+        $response=new \n         return $card;\n     }\n \n     public function store(Request $request)\n"
+                },
+                {
+                    "date": 1661183782118,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n     public function index(Request $request)\n     {\n         $card = Cart::with('variant.product')->get();\n         // dd($card);\n-        $response=new \n+        $response=new CartRE\n         return $card;\n     }\n \n     public function store(Request $request)\n"
+                },
+                {
+                    "date": 1661183788476,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n namespace App\\Http\\Controllers\\Api\\Cart;\n \n use App\\Http\\Controllers\\BaseController;\n use App\\Http\\Controllers\\Controller;\n+use App\\Http\\Resources\\Cart\\CartCollection;\n use App\\Models\\Api\\Cart\\Cart;\n use App\\Models\\Api\\Products\\Product;\n use Illuminate\\Http\\Request;\n use Illuminate\\Support\\Facades\\Validator;\n@@ -15,9 +16,9 @@\n     public function index(Request $request)\n     {\n         $card = Cart::with('variant.product')->get();\n         // dd($card);\n-        $response=new CartRE\n+        $response=new CartCollection($card)\n         return $card;\n     }\n \n     public function store(Request $request)\n"
+                },
+                {
+                    "date": 1661183794087,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,12 @@\n     public function index(Request $request)\n     {\n         $card = Cart::with('variant.product')->get();\n         // dd($card);\n-        $response=new CartCollection($card)\n+        $response=new CartCollection($card);\n+        if ($re) {\n+            # code...\n+        }\n         return $card;\n     }\n \n     public function store(Request $request)\n"
+                },
+                {
+                    "date": 1661183799869,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,10 +17,10 @@\n     {\n         $card = Cart::with('variant.product')->get();\n         // dd($card);\n         $response=new CartCollection($card);\n-        if ($re) {\n-            # code...\n+        if ($response) {\n+          ret\n         }\n         return $card;\n     }\n \n"
+                },
+                {
+                    "date": 1661183807400,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n         $card = Cart::with('variant.product')->get();\n         // dd($card);\n         $response=new CartCollection($card);\n         if ($response) {\n-          ret\n+          return $this->Response()\n         }\n         return $card;\n     }\n \n"
+                },
+                {
+                    "date": 1661183816371,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n         $card = Cart::with('variant.product')->get();\n         // dd($card);\n         $response=new CartCollection($card);\n         if ($response) {\n-          return $this->Response()\n+          return $this->Response($response,\"successfully\")\n         }\n         return $card;\n     }\n \n"
+                },
+                {
+                    "date": 1661183827399,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n         $card = Cart::with('variant.product')->get();\n         // dd($card);\n         $response=new CartCollection($card);\n         if ($response) {\n-          return $this->Response($response,\"successfully\")\n+          return $this->Response($response,\"successfully\",Response::)\n         }\n         return $card;\n     }\n \n"
+                },
+                {
+                    "date": 1661183840590,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,11 @@\n         $card = Cart::with('variant.product')->get();\n         // dd($card);\n         $response=new CartCollection($card);\n         if ($response) {\n-          return $this->Response($response,\"successfully\",Response::)\n+          return $this->Response($response,\"successfully\",Response::HTTP_OK);\n+        }else{\n+            return $this->ErrorMessage()\n         }\n         return $card;\n     }\n \n"
+                },
+                {
+                    "date": 1661183846879,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n         $response=new CartCollection($card);\n         if ($response) {\n           return $this->Response($response,\"successfully\",Response::HTTP_OK);\n         }else{\n-            return $this->ErrorMessage()\n+            return $this->ErrorMessage(\"Not Found\")\n         }\n         return $card;\n     }\n \n"
+                },
+                {
+                    "date": 1661183854727,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n         $response=new CartCollection($card);\n         if ($response) {\n           return $this->Response($response,\"successfully\",Response::HTTP_OK);\n         }else{\n-            return $this->ErrorMessage(\"Not Found\")\n+            return $this->ErrorMessage(\"Not Found\",\"\",Response::)\n         }\n         return $card;\n     }\n \n"
+                },
+                {
+                    "date": 1661183939879,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n         $response=new CartCollection($card);\n         if ($response) {\n           return $this->Response($response,\"successfully\",Response::HTTP_OK);\n         }else{\n-            return $this->ErrorMessage(\"Not Found\",\"\",Response::)\n+            return $this->ErrorMessage(\"Not Found\",\"\",Response::HTTP_NOT_FOUND)\n         }\n         return $card;\n     }\n \n"
+                },
+                {
+                    "date": 1661184068757,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,15 +14,15 @@\n class CartController extends BaseController\n {\n     public function index(Request $request)\n     {\n-        $card = Cart::with('variant.product')->get();\n+        $card = Cart::with('va')->get();\n         // dd($card);\n         $response=new CartCollection($card);\n         if ($response) {\n           return $this->Response($response,\"successfully\",Response::HTTP_OK);\n         }else{\n-            return $this->ErrorMessage(\"Not Found\",\"\",Response::HTTP_NOT_FOUND)\n+            return $this->ErrorMessage(\"Not Found\",\"\",Response::HTTP_NOT_FOUND);\n         }\n         return $card;\n     }\n \n"
+                },
+                {
+                    "date": 1661184075512,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n class CartController extends BaseController\n {\n     public function index(Request $request)\n     {\n-        $card = Cart::with('va')->get();\n+        $card = Cart::all()\n         // dd($card);\n         $response=new CartCollection($card);\n         if ($response) {\n           return $this->Response($response,\"successfully\",Response::HTTP_OK);\n"
+                },
+                {
+                    "date": 1661184096482,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,11 +14,12 @@\n class CartController extends BaseController\n {\n     public function index(Request $request)\n     {\n-        $card = Cart::all()\n+        $card = Cart::all();\n         // dd($card);\n         $response=new CartCollection($card);\n+        return $response;\n         if ($response) {\n           return $this->Response($response,\"successfully\",Response::HTTP_OK);\n         }else{\n             return $this->ErrorMessage(\"Not Found\",\"\",Response::HTTP_NOT_FOUND);\n"
+                },
+                {
+                    "date": 1661184780200,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,8 +38,9 @@\n         // $product = Product::find($request->product_id);\n         // return $product;\n         $data = Cart::create([\n             'user_id' => $request->user()->id,\n+            'user_id' => $request->user()->id,\n             'variant_id' => $request->variant_id,\n             'item_id' => $request->item_id,\n             'discount' => $request->discount\n         ]);\n"
+                },
+                {
+                    "date": 1661184785444,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n         // $product = Product::find($request->product_id);\n         // return $product;\n         $data = Cart::create([\n             'user_id' => $request->user()->id,\n-            'user_id' => $request->user()->id,\n+            'product_id' => $request->user()->id,\n             'variant_id' => $request->variant_id,\n             'item_id' => $request->item_id,\n             'discount' => $request->discount\n         ]);\n"
+                },
+                {
+                    "date": 1661184794615,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n         // $product = Product::find($request->product_id);\n         // return $product;\n         $data = Cart::create([\n             'user_id' => $request->user()->id,\n-            'product_id' => $request->user()->id,\n+            'product_id' => $request->product\n             'variant_id' => $request->variant_id,\n             'item_id' => $request->item_id,\n             'discount' => $request->discount\n         ]);\n"
+                },
+                {
+                    "date": 1661532652086,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n class CartController extends BaseController\n {\n     public function index(Request $request)\n     {\n-        $card = Cart::all();\n+        $card = Cart::get;\n         // dd($card);\n         $response=new CartCollection($card);\n         return $response;\n         if ($response) {\n@@ -38,9 +38,9 @@\n         // $product = Product::find($request->product_id);\n         // return $product;\n         $data = Cart::create([\n             'user_id' => $request->user()->id,\n-            'product_id' => $request->product\n+            'product_id' => $request->product_id,\n             'variant_id' => $request->variant_id,\n             'item_id' => $request->item_id,\n             'discount' => $request->discount\n         ]);\n"
+                },
+                {
+                    "date": 1661532657810,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n class CartController extends BaseController\n {\n     public function index(Request $request)\n     {\n-        $card = Cart::get;\n+        $card = Cart::where();\n         // dd($card);\n         $response=new CartCollection($card);\n         return $response;\n         if ($response) {\n"
+                },
+                {
+                    "date": 1661532663490,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n class CartController extends BaseController\n {\n     public function index(Request $request)\n     {\n-        $card = Cart::where();\n+        $card = Cart::where('user_id');\n         // dd($card);\n         $response=new CartCollection($card);\n         return $response;\n         if ($response) {\n"
+                },
+                {
+                    "date": 1661532671038,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n class CartController extends BaseController\n {\n     public function index(Request $request)\n     {\n-        $card = Cart::where('user_id');\n+        $card = Cart::where('user_id',$request->user()->id);\n         // dd($card);\n         $response=new CartCollection($card);\n         return $response;\n         if ($response) {\n"
+                },
+                {
+                    "date": 1661532782961,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n     public function index(Request $request)\n     {\n         $card = Cart::where('user_id',$request->user()->id)->get();\n         // dd($card);\n-        ret\n+        return\n         $response=new CartCollection($card);\n         return $response;\n         if ($response) {\n           return $this->Response($response,\"successfully\",Response::HTTP_OK);\n"
+                }
+            ],
+            "date": 1661181514748,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers\\Api\\Cart;\n\nuse App\\Http\\Controllers\\BaseController;\nuse App\\Http\\Controllers\\Controller;\nuse App\\Models\\Api\\Cart\\Cart;\nuse App\\Models\\Api\\Products\\Product;\nuse Illuminate\\Http\\Request;\nuse Illuminate\\Support\\Facades\\Validator;\nuse Symfony\\Component\\HttpFoundation\\Response;\n\nclass CartController extends BaseController\n{\n    public function index(Request $request)\n    {\n        $card = Cart::with('variants')->get();\n        dd($card);\n    }\n\n    public function store(Request $request)\n    {\n        $validator = Validator::make($request->all(), [\n            'variant' => 'required',\n        ]);\n        if ($validator->fails()) {\n            return $this->Response(\"\", $validator->errors(), Response::HTTP_BAD_REQUEST);\n        }\n        $product = Product::find($request->product_id);\n        // return $product;\n        $data = Cart::create([\n            'user_id' => $request->user()->id,\n            'variant_id' => $request->variant_id,\n            'item_id' => $request->item_id,\n            'discount' => $request->discount\n        ]);\n\n        if ($data->wasRecentlyCreated) {\n            return $this->Response($data, \"successfully\", Response::HTTP_OK);\n        } else {\n            return $this->ErrorMessage(\"Something Wrong\", \"\", Response::HTTP_BAD_REQUEST);\n        }\n    }\n}\n"
+        }
+    ]
+}

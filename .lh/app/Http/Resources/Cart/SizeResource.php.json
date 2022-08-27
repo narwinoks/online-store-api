@@ -1,0 +1,26 @@
+{
+    "sourceFile": "app/Http/Resources/Cart/SizeResource.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1661560939713,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1661560946177,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,9 @@\n      */\n     public function toArray($request)\n     {\n         return [\n-            'id'=>$this->id\n-        ]\n+            'id'=>$this->id,\n+            ''\n+        ];\n     }\n }\n"
+                },
+                {
+                    "date": 1661560958002,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,8 @@\n     public function toArray($request)\n     {\n         return [\n             'id'=>$this->id,\n-            'sku'\n+            'sku'=\n         ];\n     }\n }\n"
+                }
+            ],
+            "date": 1661560939713,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Resources\\Cart;\n\nuse Illuminate\\Http\\Resources\\Json\\JsonResource;\n\nclass SizeResource extends JsonResource\n{\n    /**\n     * Transform the resource into an array.\n     *\n     * @param  \\Illuminate\\Http\\Request  $request\n     * @return array|\\Illuminate\\Contracts\\Support\\Arrayable|\\JsonSerializable\n     */\n    public function toArray($request)\n    {\n        return [\n            'id'=>$this->id\n        ]\n    }\n}\n"
+        }
+    ]
+}

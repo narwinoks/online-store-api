@@ -3,6 +3,7 @@
 namespace App\Models\Api\Products;
 
 use App\Models\Api\Card\Card;
+use App\Models\Api\Cart\Cart;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -36,12 +37,14 @@ class Product extends Model
         return $this->hasMany(Tag::class);
     }
 
-    public function card()
-    {
-        return $this->hasMany(Card::class);
-    }
     public function variant()
     {
         return $this->hasMany(Variant::class);
     }
+
+
+    public function cart(){
+        return $this->hasMany(Cart::class);
+    }
 }
+

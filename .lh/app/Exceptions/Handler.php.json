@@ -1,0 +1,22 @@
+{
+    "sourceFile": "app/Exceptions/Handler.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1661599494656,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1661599502455,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,10 @@\n \n namespace App\\Exceptions;\n \n use Illuminate\\Foundation\\Exceptions\\Handler as ExceptionHandler;\n+use Symfony\\Component\\HttpKernel\\Exception\\MethodNotAllowedHttpException;\n+use Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException;\n use Throwable;\n \n class Handler extends ExceptionHandler\n {\n"
+                }
+            ],
+            "date": 1661599494656,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Exceptions;\n\nuse Illuminate\\Foundation\\Exceptions\\Handler as ExceptionHandler;\nuse Throwable;\n\nclass Handler extends ExceptionHandler\n{\n    /**\n     * A list of exception types with their corresponding custom log levels.\n     *\n     * @var array<class-string<\\Throwable>, \\Psr\\Log\\LogLevel::*>\n     */\n    protected $levels = [\n        //\n    ];\n\n    /**\n     * A list of the exception types that are not reported.\n     *\n     * @var array<int, class-string<\\Throwable>>\n     */\n    protected $dontReport = [\n        //\n    ];\n\n    /**\n     * A list of the inputs that are never flashed to the session on validation exceptions.\n     *\n     * @var array<int, string>\n     */\n    protected $dontFlash = [\n        'current_password',\n        'password',\n        'password_confirmation',\n    ];\n\n    /**\n     * Register the exception handling callbacks for the application.\n     *\n     * @return void\n     */\n    public function register()\n    {\n        $this->reportable(function (Throwable $e) {\n            //\n        });\n    }\n    public function render($request, Throwable $exception)\n    {\n        if ($exception instanceof MethodNotAllowedHttpException) {\n            return response()->json([\n                'success' => false,\n                'message' => 'Method is not allowed for the requested route',\n            ], 405);\n        } else if ($exception instanceof NotFoundHttpException) {\n            return response()->json([\n                'success' => false,\n                'message' => 'Not Found!'\n            ], 404);\n        }\n\n        return parent::render($request, $exception);\n    }\n\n    protected function unauthenticated($request, \\Illuminate\\Auth\\AuthenticationException $exception)\n    {\n        return response()->json([\n            'success' => false,\n            'message' => $exception->getMessage()\n        ], 401);\n    }\n\n}\n"
+        }
+    ]
+}

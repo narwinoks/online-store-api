@@ -1,0 +1,74 @@
+{
+    "sourceFile": "app/Http/Middleware/JsonResponseMiddleware.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 14,
+            "patches": [
+                {
+                    "date": 1661563031733,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1661563052937,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n namespace App\\Http\\Middleware;\n \n use Closure;\n use Illuminate\\Http\\Request;\n+use Illuminate\\Routing\\ResponseFactory;\n \n class JsonResponseMiddleware\n {\n     /**\n"
+                },
+                {
+                    "date": 1661563079862,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,7 +20,21 @@\n         $this->responseFactory = $responseFactory;\n     }\n     public function handle(Request $request, Closure $next)\n     {\n-        return $next($request);\n+        // First, set the header so any other middleware knows we're\n+        // dealing with a should-be JSON response.\n+        $request->headers->set('Accept', 'application/json');\n+\n+        // Get the response\n+        $response = $next($request);\n+\n+        // If the response is not strictly a JsonResponse, we make it\n+        if (!$response instanceof JsonResponse) {\n+            $response = $this->responseFactory->json(\n+                $response->content(),\n+                $response->status(),\n+                $response->headers->all()\n+            );\n+        }\n     }\n }\n"
+                },
+                {
+                    "date": 1661563087151,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n namespace App\\Http\\Middleware;\n \n use Closure;\n+use Illuminate\\Http\\JsonResponse;\n use Illuminate\\Http\\Request;\n use Illuminate\\Routing\\ResponseFactory;\n \n class JsonResponseMiddleware\n"
+                },
+                {
+                    "date": 1661563099444,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,7 +35,8 @@\n                 $response->content(),\n                 $response->status(),\n                 $response->headers->all()\n             );\n+            return $response;\n         }\n     }\n }\n"
+                },
+                {
+                    "date": 1661563263684,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,11 +2,9 @@\n \n namespace App\\Http\\Middleware;\n \n use Closure;\n-use Illuminate\\Http\\JsonResponse;\n use Illuminate\\Http\\Request;\n-use Illuminate\\Routing\\ResponseFactory;\n \n class JsonResponseMiddleware\n {\n     /**\n@@ -15,28 +13,10 @@\n      * @param  \\Illuminate\\Http\\Request  $request\n      * @param  \\Closure(\\Illuminate\\Http\\Request): (\\Illuminate\\Http\\Response|\\Illuminate\\Http\\RedirectResponse)  $next\n      * @return \\Illuminate\\Http\\Response|\\Illuminate\\Http\\RedirectResponse\n      */\n-    public function __construct(ResponseFactory $responseFactory)\n-    {\n-        $this->responseFactory = $responseFactory;\n-    }\n+    \n     public function handle(Request $request, Closure $next)\n     {\n-        // First, set the header so any other middleware knows we're\n-        // dealing with a should-be JSON response.\n-        $request->headers->set('Accept', 'application/json');\n-\n-        // Get the response\n-        $response = $next($request);\n-\n-        // If the response is not strictly a JsonResponse, we make it\n-        if (!$response instanceof JsonResponse) {\n-            $response = $this->responseFactory->json(\n-                $response->content(),\n-                $response->status(),\n-                $response->headers->all()\n-            );\n-            return $response;\n-        }\n+        return $next($request);\n     }\n }\n"
+                },
+                {
+                    "date": 1661563269672,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,7 +16,10 @@\n      */\n     \n     public function handle(Request $request, Closure $next)\n     {\n+        // set Accept request header to application/json\n+        $request->headers->set('Accept', 'application/json');\n+\n         return $next($request);\n     }\n }\n"
+                },
+                {
+                    "date": 1661563315471,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,10 +16,15 @@\n      */\n     \n     public function handle(Request $request, Closure $next)\n     {\n-        // set Accept request header to application/json\n-        $request->headers->set('Accept', 'application/json');\n+       // Force to application/json rendering on API calls\n++        if ($request->is('api*')) {\n++            // set Accept request header to application/json\n++            $request->headers->set('Accept', 'application/json');\n++        }\n++\n++        // Default to the parent class' implementation of handler\n++        return parent::render($request, $e);\n \n-        return $next($request);\n     }\n }\n"
+                },
+                {
+                    "date": 1661563322201,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n +            // set Accept request header to application/json\n +            $request->headers->set('Accept', 'application/json');\n +        }\n +\n-+        // Default to the parent class' implementation of handler\n-+        return parent::render($request, $e);\n+        // Default to the parent class' implementation of handler\n+   return parent::render($request, $e);\n \n     }\n }\n"
+                },
+                {
+                    "date": 1661563359277,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,17 +13,17 @@\n      * @param  \\Illuminate\\Http\\Request  $request\n      * @param  \\Closure(\\Illuminate\\Http\\Request): (\\Illuminate\\Http\\Response|\\Illuminate\\Http\\RedirectResponse)  $next\n      * @return \\Illuminate\\Http\\Response|\\Illuminate\\Http\\RedirectResponse\n      */\n-    \n-    public function handle(Request $request, Closure $next)\n+\n+    public function render($request, Throwable $e)\n     {\n        // Force to application/json rendering on API calls\n-+        if ($request->is('api*')) {\n-+            // set Accept request header to application/json\n-+            $request->headers->set('Accept', 'application/json');\n-+        }\n-+\n+        if ($request->is('api*')) {\n+            // set Accept request header to application/json\n+            $request->headers->set('Accept', 'application/json');\n+        }\n+\n         // Default to the parent class' implementation of handler\n    return parent::render($request, $e);\n \n     }\n"
+                },
+                {
+                    "date": 1661563369694,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n namespace App\\Http\\Middleware;\n \n use Closure;\n use Illuminate\\Http\\Request;\n+use Throwable;\n \n class JsonResponseMiddleware\n {\n     /**\n"
+                },
+                {
+                    "date": 1661563519745,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,8 @@\n namespace App\\Http\\Middleware;\n \n use Closure;\n use Illuminate\\Http\\Request;\n-use Throwable;\n \n class JsonResponseMiddleware\n {\n     /**\n@@ -14,18 +13,9 @@\n      * @param  \\Illuminate\\Http\\Request  $request\n      * @param  \\Closure(\\Illuminate\\Http\\Request): (\\Illuminate\\Http\\Response|\\Illuminate\\Http\\RedirectResponse)  $next\n      * @return \\Illuminate\\Http\\Response|\\Illuminate\\Http\\RedirectResponse\n      */\n-\n-    public function render($request, Throwable $e)\n+    public function handle(Request $request, Closure $next)\n     {\n-       // Force to application/json rendering on API calls\n-        if ($request->is('api*')) {\n-            // set Accept request header to application/json\n-            $request->headers->set('Accept', 'application/json');\n-        }\n-\n-        // Default to the parent class' implementation of handler\n-   return parent::render($request, $e);\n-\n+        return $next($request);\n     }\n }\n"
+                },
+                {
+                    "date": 1661563786613,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,7 +15,15 @@\n      * @return \\Illuminate\\Http\\Response|\\Illuminate\\Http\\RedirectResponse\n      */\n     public function handle(Request $request, Closure $next)\n     {\n+        if (!$request->isMethod('post')) return $next($request);\n+\n+\n+        $acceptHeader = $request->header('Accept');\n+        if ($acceptHeader != 'application/json') {\n+            return response()->json([], 406);\n+        }\n+\n         return $next($request);\n     }\n }\n"
+                },
+                {
+                    "date": 1661564065939,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,15 +15,10 @@\n      * @return \\Illuminate\\Http\\Response|\\Illuminate\\Http\\RedirectResponse\n      */\n     public function handle(Request $request, Closure $next)\n     {\n-        if (!$request->isMethod('post')) return $next($request);\n+        i $request->headers->set('Accept', 'application/json');\n+        $request->headers->set('Content-Type', 'application/json');\n \n-\n-        $acceptHeader = $request->header('Accept');\n-        if ($acceptHeader != 'application/json') {\n-            return response()->json([], 406);\n-        }\n-\n         return $next($request);\n     }\n }\n"
+                },
+                {
+                    "date": 1661564071251,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n      * @return \\Illuminate\\Http\\Response|\\Illuminate\\Http\\RedirectResponse\n      */\n     public function handle(Request $request, Closure $next)\n     {\n-        i $request->headers->set('Accept', 'application/json');\n+        $request->headers->set('Accept', 'application/json');\n         $request->headers->set('Content-Type', 'application/json');\n \n         return $next($request);\n     }\n"
+                }
+            ],
+            "date": 1661563031733,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Middleware;\n\nuse Closure;\nuse Illuminate\\Http\\Request;\n\nclass JsonResponseMiddleware\n{\n    /**\n     * Handle an incoming request.\n     *\n     * @param  \\Illuminate\\Http\\Request  $request\n     * @param  \\Closure(\\Illuminate\\Http\\Request): (\\Illuminate\\Http\\Response|\\Illuminate\\Http\\RedirectResponse)  $next\n     * @return \\Illuminate\\Http\\Response|\\Illuminate\\Http\\RedirectResponse\n     */\n    public function __construct(ResponseFactory $responseFactory)\n    {\n        $this->responseFactory = $responseFactory;\n    }\n    public function handle(Request $request, Closure $next)\n    {\n        return $next($request);\n    }\n}\n"
+        }
+    ]
+}

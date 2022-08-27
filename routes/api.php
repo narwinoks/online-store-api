@@ -135,8 +135,9 @@ Route::prefix('products')->group(function () {
 
 Route::prefix('cart')->group(function () {
     Route::controller(CartController::class)->group(function () {
-        Route::post('/', 'store')->middleware('auth:sanctum');
         Route::get('/', 'index')->middleware('auth:sanctum');
+        Route::post('/', 'store')->middleware('auth:sanctum');
+        Route::delete('/', 'destory')->middleware('auth:sanctum');
     });
 });
 Route::get('tes', [VariantsController::class, 'tes']);

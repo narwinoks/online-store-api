@@ -1,0 +1,26 @@
+{
+    "sourceFile": "app/Models/Api/Products/Item.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1661560811581,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1661560820272,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,6 +17,8 @@\n     public function size()\n     {\n         return $this->belongsTo(Size::class);\n     }\n-    public function cart\n+    public function cart(){\n+        return $this->belongsTo()\n+    }\n }\n"
+                },
+                {
+                    "date": 1661560825375,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n <?php\n \n namespace App\\Models\\Api\\Products;\n \n+use App\\Models\\Api\\Cart\\Cart;\n use Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\n use Illuminate\\Database\\Eloquent\\Model;\n \n class Item extends Model\n@@ -18,7 +19,7 @@\n     {\n         return $this->belongsTo(Size::class);\n     }\n     public function cart(){\n-        return $this->belongsTo()\n+        return $this->belongsTo(Cart::class)\n     }\n }\n"
+                }
+            ],
+            "date": 1661560811581,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Models\\Api\\Products;\n\nuse Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\nuse Illuminate\\Database\\Eloquent\\Model;\n\nclass Item extends Model\n{\n    use HasFactory;\n    protected $guarded = [];\n\n    public function variant()\n    {\n        return $this->belongsTo(Variant::class);\n    }\n    public function size()\n    {\n        return $this->belongsTo(Size::class);\n    }\n    public function cart\n}\n"
+        }
+    ]
+}

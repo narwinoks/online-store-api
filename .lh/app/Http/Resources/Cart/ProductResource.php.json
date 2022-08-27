@@ -1,0 +1,66 @@
+{
+    "sourceFile": "app/Http/Resources/Cart/ProductResource.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 12,
+            "patches": [
+                {
+                    "date": 1661532950883,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1661532962596,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,9 @@\n      */\n     public function toArray($request)\n     {\n         return [\n-            'id'\n-        ]\n+            'id'=>$this->id,\n+            'product'\n+        ];\n     }\n }\n"
+                },
+                {
+                    "date": 1661532968768,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,8 @@\n     public function toArray($request)\n     {\n         return [\n             'id'=>$this->id,\n-            'product'\n+            'product'=>$this->title\n         ];\n     }\n }\n"
+                },
+                {
+                    "date": 1661532974339,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,9 @@\n     public function toArray($request)\n     {\n         return [\n             'id'=>$this->id,\n-            'product'=>$this->title\n+            'product'=>$this->title,\n+            'shop'\n         ];\n     }\n }\n"
+                },
+                {
+                    "date": 1661559783926,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,9 @@\n     {\n         return [\n             'id'=>$this->id,\n             'product'=>$this->title,\n-            'shop'\n+            'shop'=>$this->shop,\n+            'variants'=>$this->variant\n         ];\n     }\n }\n"
+                },
+                {
+                    "date": 1661559805272,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,8 @@\n         return [\n             'id'=>$this->id,\n             'product'=>$this->title,\n             'shop'=>$this->shop,\n-            'variants'=>$this->variant\n+            'variants'=>$this->variant_id\n         ];\n     }\n }\n"
+                },
+                {
+                    "date": 1661560248598,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,9 @@\n      * @return array|\\Illuminate\\Contracts\\Support\\Arrayable|\\JsonSerializable\n      */\n     public function toArray($request)\n     {\n+        return parent::toArray($request);\n         return [\n             'id'=>$this->id,\n             'product'=>$this->title,\n             'shop'=>$this->shop,\n"
+                },
+                {
+                    "date": 1661560267806,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,10 +13,12 @@\n      * @return array|\\Illuminate\\Contracts\\Support\\Arrayable|\\JsonSerializable\n      */\n     public function toArray($request)\n     {\n-        return parent::toArray($request);\n         return [\n+            'variant'\n+        ];\n+        return [\n             'id'=>$this->id,\n             'product'=>$this->title,\n             'shop'=>$this->shop,\n             'variants'=>$this->variant_id\n"
+                },
+                {
+                    "date": 1661560276430,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n      */\n     public function toArray($request)\n     {\n         return [\n-            'variant'\n+            'variant'=>$this->variant\n         ];\n         return [\n             'id'=>$this->id,\n             'product'=>$this->title,\n"
+                },
+                {
+                    "date": 1661560421763,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,11 +14,8 @@\n      */\n     public function toArray($request)\n     {\n         return [\n-            'variant'=>$this->variant\n-        ];\n-        return [\n             'id'=>$this->id,\n             'product'=>$this->title,\n             'shop'=>$this->shop,\n             'variants'=>$this->variant_id\n"
+                },
+                {
+                    "date": 1661560536425,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,7 @@\n         return [\n             'id'=>$this->id,\n             'product'=>$this->title,\n             'shop'=>$this->shop,\n-            'variants'=>$this->variant_id\n         ];\n     }\n }\n"
+                },
+                {
+                    "date": 1661560667439,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,10 @@\n      * @return array|\\Illuminate\\Contracts\\Support\\Arrayable|\\JsonSerializable\n      */\n     public function toArray($request)\n     {\n+        return parent::toArray($request);\n+\n         return [\n             'id'=>$this->id,\n             'product'=>$this->title,\n             'shop'=>$this->shop,\n"
+                },
+                {
+                    "date": 1661561027689,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,10 +13,8 @@\n      * @return array|\\Illuminate\\Contracts\\Support\\Arrayable|\\JsonSerializable\n      */\n     public function toArray($request)\n     {\n-        return parent::toArray($request);\n-\n         return [\n             'id'=>$this->id,\n             'product'=>$this->title,\n             'shop'=>$this->shop,\n"
+                }
+            ],
+            "date": 1661532950883,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Resources\\Cart;\n\nuse Illuminate\\Http\\Resources\\Json\\JsonResource;\n\nclass ProductResource extends JsonResource\n{\n    /**\n     * Transform the resource into an array.\n     *\n     * @param  \\Illuminate\\Http\\Request  $request\n     * @return array|\\Illuminate\\Contracts\\Support\\Arrayable|\\JsonSerializable\n     */\n    public function toArray($request)\n    {\n        return [\n            'id'\n        ]\n    }\n}\n"
+        }
+    ]
+}

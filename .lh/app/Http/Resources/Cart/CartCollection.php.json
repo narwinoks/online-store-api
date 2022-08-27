@@ -1,0 +1,26 @@
+{
+    "sourceFile": "app/Http/Resources/Cart/CartCollection.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1661183979351,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1661183985334,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,7 +13,7 @@\n      * @return array|\\Illuminate\\Contracts\\Support\\Arrayable|\\JsonSerializable\n      */\n     public function toArray($request)\n     {\n-        return  new \n+        return  new CartResource()\n     }\n }\n"
+                },
+                {
+                    "date": 1661183992695,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,7 +13,7 @@\n      * @return array|\\Illuminate\\Contracts\\Support\\Arrayable|\\JsonSerializable\n      */\n     public function toArray($request)\n     {\n-        return  new CartResource($this->collection())\n+        return  new CartResource($this->collection()\n     }\n }\n"
+                }
+            ],
+            "date": 1661183979351,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Resources\\Cart;\n\nuse Illuminate\\Http\\Resources\\Json\\ResourceCollection;\n\nclass CartCollection extends ResourceCollection\n{\n    /**\n     * Transform the resource collection into an array.\n     *\n     * @param  \\Illuminate\\Http\\Request  $request\n     * @return array|\\Illuminate\\Contracts\\Support\\Arrayable|\\JsonSerializable\n     */\n    public function toArray($request)\n    {\n        return  new \n    }\n}\n"
+        }
+    ]
+}

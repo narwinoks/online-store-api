@@ -1,0 +1,30 @@
+{
+    "sourceFile": "app/Http/Kernel.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1661563121574,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1661599597818,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,9 +53,9 @@\n      *\n      * @var array<string, class-string|string>\n      */\n     protected $routeMiddleware = [\n-        'auth' => \\App\\Http\\Middleware\\Authenticate::class,\n+        // 'auth' => \\App\\Http\\Middleware\\Authenticate::class,\n         'auth.basic' => \\Illuminate\\Auth\\Middleware\\AuthenticateWithBasicAuth::class,\n         'auth.session' => \\Illuminate\\Session\\Middleware\\AuthenticateSession::class,\n         'cache.headers' => \\Illuminate\\Http\\Middleware\\SetCacheHeaders::class,\n         'can' => \\Illuminate\\Auth\\Middleware\\Authorize::class,\n"
+                },
+                {
+                    "date": 1661599605775,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,9 +53,9 @@\n      *\n      * @var array<string, class-string|string>\n      */\n     protected $routeMiddleware = [\n-        // 'auth' => \\App\\Http\\Middleware\\Authenticate::class,\n+        'auth' => \\App\\Http\\Middleware\\Authenticate::class,\n         'auth.basic' => \\Illuminate\\Auth\\Middleware\\AuthenticateWithBasicAuth::class,\n         'auth.session' => \\Illuminate\\Session\\Middleware\\AuthenticateSession::class,\n         'cache.headers' => \\Illuminate\\Http\\Middleware\\SetCacheHeaders::class,\n         'can' => \\Illuminate\\Auth\\Middleware\\Authorize::class,\n"
+                },
+                {
+                    "date": 1661599637754,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,8 +54,9 @@\n      * @var array<string, class-string|string>\n      */\n     protected $routeMiddleware = [\n         'auth' => \\App\\Http\\Middleware\\Authenticate::class,\n+        \n         'auth.basic' => \\Illuminate\\Auth\\Middleware\\AuthenticateWithBasicAuth::class,\n         'auth.session' => \\Illuminate\\Session\\Middleware\\AuthenticateSession::class,\n         'cache.headers' => \\Illuminate\\Http\\Middleware\\SetCacheHeaders::class,\n         'can' => \\Illuminate\\Auth\\Middleware\\Authorize::class,\n"
+                }
+            ],
+            "date": 1661563121574,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http;\n\nuse Illuminate\\Foundation\\Http\\Kernel as HttpKernel;\n\nclass Kernel extends HttpKernel\n{\n    /**\n     * The application's global HTTP middleware stack.\n     *\n     * These middleware are run during every request to your application.\n     *\n     * @var array<int, class-string|string>\n     */\n    protected $middleware = [\n        // \\App\\Http\\Middleware\\TrustHosts::class,\n        \\App\\Http\\Middleware\\TrustProxies::class,\n        \\Illuminate\\Http\\Middleware\\HandleCors::class,\n        \\App\\Http\\Middleware\\PreventRequestsDuringMaintenance::class,\n        \\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize::class,\n        \\App\\Http\\Middleware\\TrimStrings::class,\n        \\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull::class,\n    ];\n\n    /**\n     * The application's route middleware groups.\n     *\n     * @var array<string, array<int, class-string|string>>\n     */\n    protected $middlewareGroups = [\n        'web' => [\n            \\App\\Http\\Middleware\\EncryptCookies::class,\n            \\Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse::class,\n            \\Illuminate\\Session\\Middleware\\StartSession::class,\n            \\Illuminate\\View\\Middleware\\ShareErrorsFromSession::class,\n            \\App\\Http\\Middleware\\VerifyCsrfToken::class,\n            \\Illuminate\\Routing\\Middleware\\SubstituteBindings::class,\n        ],\n\n        'api' => [\n            \\Laravel\\Sanctum\\Http\\Middleware\\EnsureFrontendRequestsAreStateful::class,\n            'throttle:api',\n            \\App\\Http\\Middleware\\JsonResponseMiddleware::class,\n            \\Illuminate\\Routing\\Middleware\\SubstituteBindings::class,\n        ],\n    ];\n\n    /**\n     * The application's route middleware.\n     *\n     * These middleware may be assigned to groups or used individually.\n     *\n     * @var array<string, class-string|string>\n     */\n    protected $routeMiddleware = [\n        'auth' => \\App\\Http\\Middleware\\Authenticate::class,\n        'auth.basic' => \\Illuminate\\Auth\\Middleware\\AuthenticateWithBasicAuth::class,\n        'auth.session' => \\Illuminate\\Session\\Middleware\\AuthenticateSession::class,\n        'cache.headers' => \\Illuminate\\Http\\Middleware\\SetCacheHeaders::class,\n        'can' => \\Illuminate\\Auth\\Middleware\\Authorize::class,\n        'guest' => \\App\\Http\\Middleware\\RedirectIfAuthenticated::class,\n        'password.confirm' => \\Illuminate\\Auth\\Middleware\\RequirePassword::class,\n        'signed' => \\Illuminate\\Routing\\Middleware\\ValidateSignature::class,\n        'throttle' => \\Illuminate\\Routing\\Middleware\\ThrottleRequests::class,\n        'verified' => \\Illuminate\\Auth\\Middleware\\EnsureEmailIsVerified::class,\n    ];\n}\n"
+        }
+    ]
+}

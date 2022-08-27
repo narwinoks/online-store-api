@@ -1,0 +1,22 @@
+{
+    "sourceFile": "app/Http/Middleware/Authenticate.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1661599462601,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1661599475863,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,20 +13,9 @@\n      * @return string|null\n      */\n     protected function redirectTo($request)\n     {\n-        if ($exception instanceof MethodNotAllowedHttpException) {\n-            return response()->json([\n-                'success' => false,\n-                'message' => 'Method is not allowed for the requested route',\n-            ], 405);\n-        } else if ($exception instanceof NotFoundHttpException) {\n-            return response()->json([\n-                'success' => false,\n-                'message' => 'Not Found!'\n-            ], 404);\n+        if (! $request->expectsJson()) {\n+            return route('login');\n         }\n-\n-        return parent::render($request, $exception);\n-\n     }\n }\n"
+                }
+            ],
+            "date": 1661599462601,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Middleware;\n\nuse Illuminate\\Auth\\Middleware\\Authenticate as Middleware;\n\nclass Authenticate extends Middleware\n{\n    /**\n     * Get the path the user should be redirected to when they are not authenticated.\n     *\n     * @param  \\Illuminate\\Http\\Request  $request\n     * @return string|null\n     */\n    protected function redirectTo($request)\n    {\n        if ($exception instanceof MethodNotAllowedHttpException) {\n            return response()->json([\n                'success' => false,\n                'message' => 'Method is not allowed for the requested route',\n            ], 405);\n        } else if ($exception instanceof NotFoundHttpException) {\n            return response()->json([\n                'success' => false,\n                'message' => 'Not Found!'\n            ], 404);\n        }\n\n        return parent::render($request, $exception);\n\n    }\n}\n"
+        }
+    ]
+}

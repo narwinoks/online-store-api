@@ -1,0 +1,70 @@
+{
+    "sourceFile": "app/Http/Resources/Cart/CartResource.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 13,
+            "patches": [
+                {
+                    "date": 1661184026518,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1661184032016,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,8 @@\n      */\n     public function toArray($request)\n     {\n         return [\n-            'id'\n-        ]\n+            'id'=>$this->id\n+        ];\n     }\n }\n"
+                },
+                {
+                    "date": 1661184203668,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,9 @@\n      */\n     public function toArray($request)\n     {\n         return [\n-            'id'=>$this->id\n+            'id'=>$this->id,\n+            'product'\n         ];\n     }\n }\n"
+                },
+                {
+                    "date": 1661184210229,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,8 @@\n     public function toArray($request)\n     {\n         return [\n             'id'=>$this->id,\n-            'product'\n+            'product'=>\n         ];\n     }\n }\n"
+                },
+                {
+                    "date": 1661184217501,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,8 @@\n     public function toArray($request)\n     {\n         return [\n             'id'=>$this->id,\n-            'product'=>\n+            'product'=>new productres\n         ];\n     }\n }\n"
+                },
+                {
+                    "date": 1661184224713,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n <?php\n \n namespace App\\Http\\Resources\\Cart;\n \n+use App\\Http\\Resources\\Products\\ProductResource;\n use Illuminate\\Http\\Resources\\Json\\JsonResource;\n \n class CartResource extends JsonResource\n {\n@@ -15,8 +16,8 @@\n     public function toArray($request)\n     {\n         return [\n             'id'=>$this->id,\n-            'product'=>new productres\n+            'product'=>new ProductResource::collection()\n         ];\n     }\n }\n"
+                },
+                {
+                    "date": 1661184231286,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,8 @@\n     public function toArray($request)\n     {\n         return [\n             'id'=>$this->id,\n-            'product'=>new ProductResource::collection()\n+            'product'=>new ProductResource::collection($this->product)\n         ];\n     }\n }\n"
+                },
+                {
+                    "date": 1661184236617,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,8 @@\n     public function toArray($request)\n     {\n         return [\n             'id'=>$this->id,\n-            'product'=>new ProductResource::collection($this->product)\n+            'product'=>new ProductResource::collection($this->variant)\n         ];\n     }\n }\n"
+                },
+                {
+                    "date": 1661184253618,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,8 @@\n     public function toArray($request)\n     {\n         return [\n             'id'=>$this->id,\n-            'product'=>new ProductResource::collection($this->variant)\n+            'product'=> ProductResource::collection($this->variant)\n         ];\n     }\n }\n"
+                },
+                {
+                    "date": 1661184269938,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,8 @@\n     public function toArray($request)\n     {\n         return [\n             'id'=>$this->id,\n-            'product'=> ProductResource::collection($this->variant)\n+            'variant'=> ProductResorce::collection($this->variant)\n         ];\n     }\n }\n"
+                },
+                {
+                    "date": 1661184308125,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n namespace App\\Http\\Resources\\Cart;\n \n use App\\Http\\Resources\\Products\\ProductResource;\n+use App\\Http\\Resources\\Variants\\VariantResource;\n use Illuminate\\Http\\Resources\\Json\\JsonResource;\n \n class CartResource extends JsonResource\n {\n@@ -16,8 +17,8 @@\n     public function toArray($request)\n     {\n         return [\n             'id'=>$this->id,\n-            'variant'=> ProductResorce::collection($this->variant)\n+            'variant'=>$this->variant\n         ];\n     }\n }\n"
+                },
+                {
+                    "date": 1661184334834,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,8 @@\n     public function toArray($request)\n     {\n         return [\n             'id'=>$this->id,\n-            'variant'=>$this->variant\n+            'variant'=>new VariantResource()\n         ];\n     }\n }\n"
+                },
+                {
+                    "date": 1661184840816,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,8 @@\n     public function toArray($request)\n     {\n         return [\n             'id'=>$this->id,\n-            'variant'=>new VariantResource($this->variant)\n+            'peoduct'=>new VariantResource($this->variant)\n         ];\n     }\n }\n"
+                },
+                {
+                    "date": 1661560116317,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n <?php\n \n namespace App\\Http\\Resources\\Cart;\n \n+use App\\Http\\Resources\\Variants\\VariantResource;\n use Illuminate\\Http\\Resources\\Json\\JsonResource;\n \n class CartResource extends JsonResource\n {\n@@ -16,9 +17,9 @@\n     {\n \n         return [\n             'id'=>$this->id,\n-            'variants'=>new varianr,\n+            'variants'=>new VariantResource(),\n             'peoduct'=>new ProductResource($this->Product)\n         ];\n     }\n }\n"
+                }
+            ],
+            "date": 1661184026518,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Resources\\Cart;\n\nuse Illuminate\\Http\\Resources\\Json\\JsonResource;\n\nclass CartResource extends JsonResource\n{\n    /**\n     * Transform the resource into an array.\n     *\n     * @param  \\Illuminate\\Http\\Request  $request\n     * @return array|\\Illuminate\\Contracts\\Support\\Arrayable|\\JsonSerializable\n     */\n    public function toArray($request)\n    {\n        return [\n            'id'\n        ]\n    }\n}\n"
+        }
+    ]
+}

@@ -5,6 +5,7 @@ namespace App\Models\Api;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Models\Api\Address\Address;
+use App\Models\Api\Cart\Cart;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -46,5 +47,8 @@ class User extends Model
     public function address()
     {
         return $this->hasMany(Address::class);
+    }
+    public function cart(){
+        return $this->hasMany(Cart::class);
     }
 }

@@ -15,10 +15,9 @@ return new class extends Migration
     {
         Schema::create('card_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('card_id');
             $table->foreignId('product_id');
-            $table->integer('sku');
-            $table->double('price');
+            $table->foreignId('variant_id');
+            $table->foreignId('item_id');
             $table->double('discount');
             $table->timestamps();
         });

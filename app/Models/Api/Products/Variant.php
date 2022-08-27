@@ -2,6 +2,7 @@
 
 namespace App\Models\Api\Products;
 
+use App\Models\Api\Cart\Cart;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,5 +26,9 @@ class Variant extends Model
     public function item()
     {
         return $this->hasMany(Item::class);
+    }
+
+    public function cart(){
+        return $this->belongsTo(Cart::class);
     }
 }
